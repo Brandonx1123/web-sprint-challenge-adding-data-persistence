@@ -37,16 +37,24 @@ const getById = async (task_id) => {
   }
 };
 
-const createTask = async (task) => {
-  const [id] = await db("tasks").insert(task, [
-    "task_id",
-    "task_description",
-    "task_notes",
-    "task_completed",
-    "project_id",
-  ]);
-  return getById(id);
-};
+// const createTask = async (task) => {
+//   const [id] = await db("tasks").insert(task, [
+//     "task_id",
+//     "task_description",
+//     "task_notes",
+//     "task_completed",
+//     "project_id",
+//   ]);
+//   return getById(id);
+// };
+
+function createTask(task) {
+  return db("tasks")
+    .insert(task)
+    .then((res) => {
+      return getById(res[0]);
+    });
+}
 
 module.exports = {
   getAllTasks,

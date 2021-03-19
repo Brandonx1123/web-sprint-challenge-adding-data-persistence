@@ -8,7 +8,7 @@ exports.up = function (knex) {
     })
     .createTable("resources", (tbl) => {
       tbl.increments("resource_id");
-      tbl.string("resource_name", 128).notNullable();
+      tbl.string("resource_name", 128).unique().notNullable();
       tbl.text("resource_description");
     })
     .createTable("tasks", (tbl) => {
